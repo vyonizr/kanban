@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Noto+Sans|PT+Sans|Signika');
+
+.swal2-popup {
+  font-family: 'Lato', sans-serif !important;
+}
+
+.noto-sans {
+  font-family: 'Noto Sans', sans-serif !important;
+}
+
+.pt-sans {
+  font-family: 'PT Sans', sans-serif !important;
+}
+
+.signika {
+  font-family: 'Signika', sans-serif !important;
+}
+
+.lato {
+  font-family: 'Lato', sans-serif !important;
+}
