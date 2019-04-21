@@ -3,11 +3,12 @@
     d-flex
     lg12
   >
-    <v-card :color="color" :dark="dark" hover>
-      <v-card-title :color="color">
+    <v-card :color="color" :dark="dark" hover style="cursor: default;">
+      <v-card-title :color="color" style="padding: 16px 16px 0px 16px;">
         <div>
           <span class="headline pt-sans">{{ task.title }} <br></span>
-          <span class="caption">Assigned to: {{ task.assignedTo }}</span>
+          <span class="caption">Assigned to: {{ task.assignedTo }} <br></span>
+          <span class="caption">Created: {{ parseDate(task.createdAt.toDate()) }}</span>
         </div>
       </v-card-title>
       <v-card-text color="white">
@@ -19,19 +20,19 @@
         row
       >
         <v-card-actions>
-          <v-btn v-if="task.status === 'todo'" small fab @click="moveToBacklog(task.id)">
+          <v-btn depressed v-if="task.status === 'todo'" small fab @click="moveToBacklog(task.id)">
             <v-icon>arrow_back</v-icon>
           </v-btn>
-          <v-btn v-else-if="task.status === 'going'" small fab @click="moveToTodo(task.id)">
+          <v-btn depressed v-else-if="task.status === 'going'" small fab @click="moveToTodo(task.id)">
             <v-icon>arrow_back</v-icon>
           </v-btn>
-          <v-btn v-else-if="task.status === 'done'" small fab @click="moveToGoing(task.id)">
+          <v-btn depressed v-else-if="task.status === 'done'" small fab @click="moveToGoing(task.id)">
             <v-icon>arrow_back</v-icon>
           </v-btn>
 
           <v-dialog v-model="dialog" persistent max-width="500px">
             <template v-slot:activator="{ on }">
-              <v-btn small fab dark color="blue darken-4" class="text-lg-center" v-on="on">
+              <v-btn depressed small fab dark color="blue darken-4" class="text-lg-center" v-on="on">
                 <v-icon dark>edit</v-icon>
               </v-btn>
             </template>
@@ -71,17 +72,17 @@
             </v-card>
           </v-dialog>
 
-          <v-btn small fab dark color="red" @click="confirmDelete(task.id)">
+          <v-btn depressed small fab dark color="red" @click="confirmDelete(task.id)">
             <v-icon dark>delete_outline</v-icon>
           </v-btn>
 
-          <v-btn v-if="task.status === 'backlog'" light small fab @click="moveToTodo(task.id)">
+          <v-btn v-if="task.status === 'backlog'" depressed light small fab @click="moveToTodo(task.id)">
             <v-icon>arrow_forward</v-icon>
           </v-btn>
-          <v-btn v-else-if="task.status === 'todo'" small fab @click="moveToGoing(task.id)">
+          <v-btn v-else-if="task.status === 'todo'" depressed small fab @click="moveToGoing(task.id)">
             <v-icon>arrow_forward</v-icon>
           </v-btn>
-          <v-btn v-else-if="task.status === 'going'" small fab @click="moveToDone(task.id)">
+          <v-btn v-else-if="task.status === 'going'" depressed small fab @click="moveToDone(task.id)">
             <v-icon>arrow_forward</v-icon>
           </v-btn>
         </v-card-actions>
@@ -91,6 +92,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import Swal from 'sweetalert2'
 
 export default {
@@ -112,18 +114,8 @@ export default {
       this.assignToInput = "",
       this.descriptionInput = ""
     },
-    addNewTask () {
-      let newTask = {
-        title: this.taskTitleInput,
-        description: this.descriptionInput,
-        assignedTo: this.assignToInput,
-        status: 'backlog',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-
-      this.$store.dispatch('addNewTask', newTask)
-      this.clearInput()
+    parseDate(date) {
+      return moment(new Date(date)).calendar()
     },
     updateTask(task) {
       let updatedTask = task
@@ -132,8 +124,8 @@ export default {
       updatedTask.assignedTo = this.assignToInput
       updatedTask.updatedAt = new Date
 
+      // this.clearInput()
       this.$store.dispatch("updateTask", updatedTask)
-      this.clearInput()
     },
     confirmDelete (taskId) {
       const vuetifySwal = Swal.mixin({

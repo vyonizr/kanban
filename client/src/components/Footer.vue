@@ -13,7 +13,7 @@
         white--text
         xs12
       >
-        <strong>Kamadesu | Kanban made simple for you</strong>
+        <strong>&copy; {{ new Date().getFullYear() }} Kamadesu | Kanban made simple for you</strong>
       </v-flex>
     </v-layout>
   </v-footer>

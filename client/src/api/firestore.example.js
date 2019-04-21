@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase/app'
+
+import "firebase/firestore";
 
 // Your firebase config
 var config = {
@@ -9,6 +11,7 @@ var config = {
   storageBucket: '',
   messagingSenderId: ''
 }
+
 firebase.initializeApp(config)
 
 const db = firebase.firestore()

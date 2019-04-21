@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="500px">
     <template v-slot:activator="{ on }">
-      <v-btn fab dark depressed color="light-blue darken-3" class="text-lg-center" v-on="on">
+      <v-btn fab dark color="light-blue darken-3" class="text-lg-center" v-on="on">
         <v-icon dark>add</v-icon>
       </v-btn>
     </template>

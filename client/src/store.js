@@ -90,7 +90,7 @@ export default new Vuex.Store({
         Swal.fire({
           type: 'success',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1000
         })
         console.log('Document written with ID: ', docRef.id)
         context.dispatch('getAllTasks')
@@ -104,10 +104,10 @@ export default new Vuex.Store({
       .set(updatedTask)
       .then(function () {
         Swal.fire({
+          position: 'top-end',
           type: 'success',
-          title: 'Updated',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1000
         })
         context.dispatch('getAllTasks')
       })
