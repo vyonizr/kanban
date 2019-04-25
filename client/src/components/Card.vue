@@ -54,12 +54,12 @@
                       ></v-text-field>
                     </v-flex>
                     <v-flex lg12>
-                      <v-text-field
+                      <v-textarea
                         v-model="descriptionInput"
                         label="Description"
                         outline
                         required
-                      ></v-text-field>
+                      ></v-textarea>
                     </v-flex>
                   </v-layout>
                 </v-container>
